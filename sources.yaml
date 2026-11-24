@@ -1,0 +1,143 @@
+# FirstSeen sources: one entry per company the bot polls.
+# Only documented public feeds belong here (see "Compliance rules" in SPEC.md).
+#
+# system: lever     -> https://api.lever.co/v0/postings/{slug}?mode=json
+#         lever_eu  -> https://api.eu.lever.co/v0/postings/{slug}?mode=json
+#         greenhouse -> https://boards-api.greenhouse.io/v1/boards/{slug}/jobs?content=true
+#
+# Every entry below returned Israeli listings on 2026-11-23 or 2026-11-24.
+
+sources:
+  - name: Mobileye
+    system: lever_eu
+    slug: mobileye
+    active: true
+
+  - name: NICE
+    system: greenhouse
+    slug: nice
+    active: true
+
+  - name: Taboola
+    system: greenhouse
+    slug: taboola
+    active: true
+
+  - name: AppsFlyer
+    system: greenhouse
+    slug: appsflyer
+    active: true
+
+  - name: Similarweb
+    system: greenhouse
+    slug: similarweb
+    active: true
+
+  - name: Riskified
+    system: greenhouse
+    slug: riskified
+    active: true
+
+  - name: JFrog
+    system: greenhouse
+    slug: jfrog
+    active: true
+
+  - name: Gong
+    system: greenhouse
+    slug: gongio
+    active: true
+
+  - name: Payoneer
+    system: greenhouse
+    slug: payoneer
+    active: true
+
+  - name: Lightricks
+    system: greenhouse
+    slug: lightricks
+    active: true
+
+  - name: MyHeritage
+    system: greenhouse
+    slug: myheritage
+    active: true
+
+  # Cyber companies
+  - name: Wiz
+    system: greenhouse
+    slug: wizinc
+    active: true
+
+  - name: Cato Networks
+    system: greenhouse
+    slug: catonetworks
+    active: true
+
+  - name: SentinelOne
+    system: greenhouse
+    slug: sentinellabs
+    active: true
+
+  - name: Orca Security
+    system: greenhouse
+    slug: orcasecurity
+    active: true
+
+  - name: Axonius
+    system: greenhouse
+    slug: axonius
+    active: true
+
+  - name: Torq
+    system: greenhouse
+    slug: torq
+    active: true
+
+  - name: Transmit Security
+    system: greenhouse
+    slug: transmitsecurity
+    active: true
+
+# ---------------------------------------------------------------------------
+# NOT polled by the bot. Kept here so nobody re-checks them or adds them by
+# mistake. "email alerts" means: covered by the employer's own job-alert emails,
+# which the version-two email adapter will read. "not checked" means the
+# careers system has not been identified yet.
+#
+# These are the employers from my Nov 2026 job search that actually had
+# student roles in range, plus the ones I asked about.
+#
+# Company              System                        Covered by
+# Amazon               amazon.jobs (own)             email alerts if offered; terms restrict robots
+# Apple                jobs.apple.com (own)          manual check; terms prohibit scraping
+# Google               own careers site              email alerts
+# Microsoft            Eightfold                     email alerts
+# Nvidia               Workday                       email alerts
+# Intel                Workday                       email alerts
+# MKS (Ophir)          Workday (mksinst.wd1)         email alerts
+# HP (Indigo)          Workday (hp.wd5)              email alerts
+# SAP                  own job site, not checked     email alerts if offered
+# Marvell              not checked                   email alerts if offered
+# Qualcomm             not checked                   email alerts if offered
+# Samsung Israel R&D   not checked                   manual check
+# PTC                  not identified                manual check
+# Elbit                own site                      manual check
+# IAI                  own site, not checked         manual check
+# Rafael               own site                      manual check
+# Check Point          own site                      manual check
+# KPMG Israel          custom site                   manual check
+# Amdocs               own portal                    manual check
+# Earnix               no Greenhouse/Lever board     manual check
+# Upwind               no Greenhouse/Lever/Ashby board  manual check
+# Copyscape, UVision   not checked                   manual check
+# Palo Alto Networks   SmartRecruiters (unconfirmed) open question, see SPEC.md appendix
+#
+# Greenhouse boards that exist but had no Israeli jobs on 2026-11-24: augury.
+#
+# Slugs that did not resolve on 2026-11-24 (company uses another system):
+#   greenhouse: mondaycom, vastdata, radware, cyberark, varonis, cellebrite,
+#               tipalti, playtika, aquasecurity, snyk, pentera, claroty, silverfort,
+#               earnix, upwind, accessfintech, globale, infinidat
+#   ashby:      cyera, upwind, island
+#   lever:      cybereason, earnix, upwind

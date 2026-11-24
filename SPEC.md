@@ -34,10 +34,10 @@ The host in a company's job-page URL identifies its system:
 | jobs.apple.com                                  | custom     | Terms prohibit scraping. Stays out       |
 | anything else                                   | custom     | Not until a feed and its terms are confirmed |
 
-### Initial sources.yaml (17 companies, all confirmed live)
+### Initial sources.yaml (18 companies, all confirmed live)
 - lever_eu: mobileye
 - greenhouse: taboola, appsflyer, wizinc, similarweb, riskified, nice, jfrog,
-  gongio, payoneer, catonetworks, sentinellabs, lightricks, orcasecurity,
+  gongio, payoneer, catonetworks, sentinellabs, lightricks, myheritage, orcasecurity,
   axonius, torq, transmitsecurity
 
 To add a company: open its careers page, click any job, read the host, and add
