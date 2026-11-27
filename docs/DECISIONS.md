@@ -177,8 +177,9 @@ D7 to D24 are listed there as recommendations and move here when their step is b
   at `uv.lock` needs to be updated, but `UV_LOCKED=1` was provided", and `uv.lock`
   was left unchanged. setup-uv v10.4.0 was published on 2026-11-20 at 14:06 UTC,
   after the D5 cooldown date, so the workflow uses v10.3.3 (2026-10-28). setup-uv
-  publishes no moving `v10` tag. The workflow had not yet run on GitHub when this
-  was written.
+  publishes no moving `v10` tag. The first run on GitHub, for commit `b591cff`,
+  passed every step in 17 seconds:
+  https://github.com/guypztos/FirstSeenBot/actions/runs/46005631875
 - **Rejected:** One workflow step per gate (clearer on the GitHub page, but a second
   copy of the gate list). A `pull_request` trigger (only needed for pull requests
   from forks, and it runs branch pushes twice). `--locked` in the Makefile (every

@@ -8,7 +8,7 @@ in [SPEC.md](../SPEC.md). Decisions already made are in [DECISIONS.md](DECISIONS
 | Done | # | Step | Tests that prove it |
 |:---:|---|---|---|
 | x | 0 | Skeleton: packaging, quality gates, local Postgres, `/health` | `/health` returns 200 |
-|   | 1 | CI: GitHub Actions runs `make check` on push | first green run after a push |
+| x | 1 | CI: GitHub Actions runs `make check` on push | first green run after a push |
 |   | 2 | `Posting` model and Lever adapter (global and EU hosts). One approved request to capture the Mobileye fixture | field mapping, EU host chosen, User-Agent sent, non-200 and bad JSON raise `FetchError` |
 |   | 3 | Greenhouse adapter, HTML description to plain text, adapter lookup by system. One approved request for one board | same set, plus HTML entities and list items become lines |
 |   | 4 | Load and validate `sources.yaml` | real file loads 18 active entries, unknown system and duplicates rejected |

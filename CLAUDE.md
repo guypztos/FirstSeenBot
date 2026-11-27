@@ -58,6 +58,7 @@ Update as soon as the real commands exist.
 - Migrate database: not available yet. Arrives with step 7 of docs/PLAN.md.
 
 ## Current status
-Source survey done (see the appendix in SPEC.md). Skeleton built: step 0 of
-docs/PLAN.md. Next is step 1 (CI). Follow docs/PLAN.md in order, one step per
-commit, and confirm each step's open decisions (D7 to D24) before building it.
+Source survey done (see the appendix in SPEC.md). Skeleton and CI built: steps 0
+and 1 of docs/PLAN.md. Next is step 2 (`Posting` model and Lever adapter). Follow
+docs/PLAN.md in order, one step per commit, and confirm each step's open decisions
+(D7 to D24) before building it.
