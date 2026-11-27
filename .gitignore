@@ -19,3 +19,6 @@ htmlcov/
 
 # macOS
 .DS_Store
+
+# JetBrains IDE settings (personal to each machine)
+.idea/
