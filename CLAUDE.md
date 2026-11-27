@@ -7,7 +7,7 @@ The owner must be able to explain and defend every design decision in an intervi
 Read SPEC.md before doing anything. Its compliance rules are binding.
 
 ## Stack
-- Python 3.12, FastAPI, httpx (async), SQLAlchemy 2 (async) with Alembic migrations.
+- Python 3.13, FastAPI, httpx (async), SQLAlchemy 2 (async) with Alembic migrations.
 - Postgres. Local development uses Postgres in Docker Compose.
 - pytest, ruff, mypy (strict).
 - Deployed to Google Cloud Run. Do not deploy or create cloud resources unasked.
