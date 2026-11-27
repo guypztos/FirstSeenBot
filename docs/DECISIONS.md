@@ -157,3 +157,35 @@ D7 to D24 are listed there as recommendations and move here when their step is b
   more code than the page is worth.
 - **Trade-off:** No browser page for trying endpoints by hand. Use `curl` or the tests.
 - **Call:** Chosen by the owner from four options on 2026-11-27.
+
+## D30. CI runs `make -k check` on every push, with pinned actions (2026-11-27)
+- **Decision:** `.github/workflows/ci.yml` runs `make -k check` on a GitHub-hosted
+  Linux runner for every push to any branch. Both actions it uses are pinned to a
+  full commit hash, taken from a release at least a week old. uv is pinned to
+  0.13.8, the version on the development machine. The job sets `UV_LOCKED=1`, gets a
+  read-only token that is not left in the checkout, and is stopped after 10 minutes.
+- **Why:** The local check and the Stop hook (D28) run on one laptop and can be
+  skipped. CI runs the same Makefile target on a clean machine, so the list of gates
+  lives in one place and "works on my machine" is tested on every push. A tag such
+  as `v7` can be moved to different code after it was reviewed; a commit hash
+  cannot. `uv run` normally rewrites a stale `uv.lock` and carries on, which would
+  let CI test versions other than the committed ones; `UV_LOCKED=1` turns that into
+  a failure.
+- **Evidence:** In a fresh clone with no `.venv` and no `.env`,
+  `UV_LOCKED=1 make -k check` passed all four gates. After one version bound was
+  loosened in that clone's `pyproject.toml`, every gate stopped with "The lockfile
+  at `uv.lock` needs to be updated, but `UV_LOCKED=1` was provided", and `uv.lock`
+  was left unchanged. setup-uv v10.4.0 was published on 2026-11-20 at 14:06 UTC,
+  after the D5 cooldown date, so the workflow uses v10.3.3 (2026-10-28). setup-uv
+  publishes no moving `v10` tag. The workflow had not yet run on GitHub when this
+  was written.
+- **Rejected:** One workflow step per gate (clearer on the GitHub page, but a second
+  copy of the gate list). A `pull_request` trigger (only needed for pull requests
+  from forks, and it runs branch pushes twice). `--locked` in the Makefile (every
+  local dependency change would need a separate `uv lock` first). `version: latest`
+  for uv (CI could change without a commit). A fixed runner image name (uv supplies
+  Python and every tool, so little comes from the image).
+- **Trade-off:** The pinned actions and the uv version are updated by hand. Nothing
+  checks that the uv version in the workflow still matches the laptop's. A pull
+  request from a fork would get no CI run.
+- **Call:** The owner approved these choices from a table of eight on 2026-11-27.

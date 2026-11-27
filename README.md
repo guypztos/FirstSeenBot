@@ -1,5 +1,7 @@
 # FirstSeen
 
+[![CI](https://github.com/guypztos/FirstSeenBot/actions/workflows/ci.yml/badge.svg)](https://github.com/guypztos/FirstSeenBot/actions/workflows/ci.yml)
+
 A Telegram bot that polls company career feeds and alerts one user about new
 student roles within commuting range. It reads only feeds the provider documents
 as public (Lever and Greenhouse in version one) and links to the employer's own
@@ -40,12 +42,20 @@ make check             # creates .venv from uv.lock, then runs every quality gat
 
 `make -k check` keeps going after a failure, so one run shows every failing gate.
 
+## Continuous integration
+
+Every push runs `make -k check` on GitHub Actions
+([.github/workflows/ci.yml](.github/workflows/ci.yml)). The run also fails when
+`uv.lock` no longer matches `pyproject.toml`. To fix that, run `uv lock` and commit
+the result.
+
 ## Layout
 
 ```
 src/firstseen/   application package
 tests/           pytest suite; tests never make real network calls
 docs/            plan and design decisions
+.github/         the CI workflow
 compose.yaml     local Postgres only
 sources.yaml     the companies the bot polls
 ```

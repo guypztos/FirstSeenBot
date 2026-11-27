@@ -1,0 +1,28 @@
+# Runs the same quality gates as a local `make check`, on every push
+# (docs/DECISIONS.md, D30).
+name: CI
+
+on: push
+
+# The job only reads the repository, so its token is allowed nothing else.
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      # Locally `uv run` quietly rewrites a stale uv.lock. In CI that must fail.
+      UV_LOCKED: "1"
+    steps:
+      # Actions are pinned to a commit hash because a tag can be moved to other code.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Do not leave the job's token in .git/config for later steps to read.
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: "0.13.8" # same as the local uv; bump both together
+      # -k: keep going after a failing gate, so one run reports every failure.
+      - run: make -k check
