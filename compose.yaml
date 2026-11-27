@@ -1,0 +1,33 @@
+# Local development database only. Production runs on Neon (see SPEC.md).
+#
+# The credentials below are throwaway values for a container that listens on
+# localhost only. They are not secrets and are used nowhere else
+# (docs/DECISIONS.md, D25).
+
+name: firstseen
+
+services:
+  db:
+    # Same major version as the Neon project. Debian-based image, not alpine:
+    # alpine's C library sorts text differently from the one Neon runs on, which
+    # would make ORDER BY differ between local and production.
+    image: postgres:18
+    environment:
+      POSTGRES_USER: firstseen
+      POSTGRES_PASSWORD: firstseen
+      POSTGRES_DB: firstseen
+    ports:
+      # Loopback only, so the database is not reachable from the network.
+      - "127.0.0.1:5432:5432"
+    volumes:
+      # From version 18 the image keeps its data in a per-version folder under
+      # /var/lib/postgresql, so the volume is mounted there, not at .../data.
+      - pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U firstseen -d firstseen"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
+volumes:
+  pgdata:

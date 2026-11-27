@@ -1,0 +1,57 @@
+[project]
+name = "firstseen"
+version = "0.1.0"
+description = "Telegram bot that alerts one user about new student roles on public career feeds"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.165.0",
+    "httpx>=0.28.1",
+    "uvicorn>=0.54.0",
+]
+
+[build-system]
+requires = ["uv_build>=0.13.8,<0.14.0"]
+build-backend = "uv_build"
+
+[tool.uv]
+# Supply-chain cooldown: ignore anything published after this date, so a release
+# has had a week of public use before it can enter uv.lock. Move the date forward
+# deliberately when upgrading (docs/DECISIONS.md, D5).
+exclude-newer = "2026-11-20T00:00:00Z"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    "E",     # pycodestyle errors
+    "F",     # pyflakes: unused imports, undefined names
+    "W",     # pycodestyle warnings
+    "I",     # import order
+    "B",     # bugbear: likely bugs, such as mutable default arguments
+    "UP",    # pyupgrade: prefer current Python syntax
+    "SIM",   # code that can be simplified
+    "RUF",   # ruff's own checks
+    "ASYNC", # blocking calls inside async functions
+    "DTZ",   # timezone-naive datetimes
+]
+
+[tool.mypy]
+strict = true
+files = ["src", "tests"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers --strict-config"
+# A forgotten `await` only raises a RuntimeWarning, so warnings fail the run.
+filterwarnings = ["error"]
+
+[dependency-groups]
+dev = [
+    "anyio>=4.16.0",
+    "mypy>=2.4.1",
+    "pytest>=9.2.0",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.17.6",
+]

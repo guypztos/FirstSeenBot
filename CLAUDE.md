@@ -37,7 +37,9 @@ Fix failures. Do not suppress a lint or type error without asking.
   rate limits or bot protection.
 - Never poll a company more than once per hour, including during development.
 - Secrets come from environment variables (a git-ignored `.env` locally). Never
-  write a token, chat ID or database URL into the repo, logs or test fixtures.
+  write a real token, chat ID or database URL into the repo, logs or test fixtures.
+  The one exception is the localhost-only URL of the Docker Compose database, which
+  uses throwaway credentials (docs/DECISIONS.md, D25).
 - No new dependencies without asking.
 
 ## Documentation and commits
@@ -48,9 +50,14 @@ Fix failures. Do not suppress a lint or type error without asking.
 
 ## Commands
 Update as soon as the real commands exist.
-- Check:
-- Run locally:
-- Migrate database:
+- Check: `make check` (`make -k check` shows every failing gate in one run)
+- Format: `make fmt`
+- Coverage: `make coverage`
+- Run locally: `make run` (serves http://127.0.0.1:8000)
+- Local database: `make db-up` and `make db-down`
+- Migrate database: not available yet. Arrives with step 7 of docs/PLAN.md.
 
 ## Current status
-Source survey done (see the appendix in SPEC.md). No code yet.
+Source survey done (see the appendix in SPEC.md). Skeleton built: step 0 of
+docs/PLAN.md. Next is step 1 (CI). Follow docs/PLAN.md in order, one step per
+commit, and confirm each step's open decisions (D7 to D24) before building it.

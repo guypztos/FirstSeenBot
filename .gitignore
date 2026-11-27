@@ -1,1 +1,21 @@
+# Secrets
 .env
+
+# Claude Code: personal settings stay local; .claude/settings.json is shared
+.claude/settings.local.json
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+dist/
+
+# Tool caches and reports
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# macOS
+.DS_Store

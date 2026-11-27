@@ -77,7 +77,7 @@ is in the appendix.
 - `POST /telegram/webhook`: bot commands. Reject requests without the
   `X-Telegram-Bot-Api-Secret-Token` header value registered with `setWebhook`.
 - `POST /jobs/poll`: called by Cloud Scheduler only. Reject other callers.
-- `GET /healthz`: liveness.
+- `GET /health`: liveness. Not `/healthz`: Cloud Run reserves some paths ending in "z".
 
 ## Source adapters
 One interface, one class per system:
@@ -145,7 +145,8 @@ change, not new code.
 ## Security and operations
 - Only my chat ID is served. All other senders are ignored.
 - Bot token, webhook secret and database URL live in Secret Manager, never in git.
-  Locally they come from a `.env` file that is git-ignored.
+  Locally they come from a `.env` file that is git-ignored. The one exception is the
+  localhost URL of the Docker Compose database, which uses throwaway credentials.
 - Budget alert set on the cloud project before any resource is created.
 - Structured logs for every poll run.
 
